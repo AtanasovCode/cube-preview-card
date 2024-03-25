@@ -1,9 +1,14 @@
+import { useState } from "react";
+
 import image from "./assets/image-equilibrium.jpg";
 import eth from "./assets/icon-ethereum.svg";
 import clock from "./assets/icon-clock.svg";
 import avatar from "./assets/image-avatar.png";
+import view from "./assets/icon-view.svg";
 
 const App = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="bg-background min-h-screen flex items-center justify-center">
       <div
@@ -12,12 +17,29 @@ const App = () => {
         md:max-w-[50%] lg:max-w-[25%]
       "
       >
-        <div className="rounded-xl overflow-hidden">
+        <div className="rounded-xl overflow-hidden relative">
           <img src={image} alt="image preview of nft" />
+          {isHovered && (
+            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+              <div className="w-full h-full opacity-30 bg-cyan absolute"></div>
+              <img
+                src={view}
+                alt="view icon"
+                className="w-12 z-40 opacity-100"
+              />
+              {/*Hover Effect*/}
+            </div>
+          )}
         </div>
 
         <div className="mt-5">
-          <div className="font-bold text-xl mb-4">Equilibrium #3429</div>
+          <div
+            className="font-bold text-xl mb-4 cursor-pointer w-max hover:text-cyan"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            Equilibrium #3429
+          </div>
           <div className="text-softBlue mb-4">
             Our equilibrium collection promotes balance and calm.
           </div>
